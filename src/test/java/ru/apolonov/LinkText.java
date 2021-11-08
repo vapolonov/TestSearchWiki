@@ -7,27 +7,29 @@ import static com.codeborne.selenide.Selenide.*;
 import static org.openqa.selenium.By.*;
 
 public class LinkText {
+  private final String url = "https://github.com/";
 
-    @Test
-    void searchCodeJunit() {
+  @Test
+  void searchCodeJunit() {
 
-      // Открыть страницу Selenide в Github
 
-      open("https://github.com/");
-      $(".header-search-input").click();
-      $(".header-search-input").sendKeys("selenide");
-      $(".header-search-input").submit();
-      $(".repo-list").$(linkText("selenide/selenide")).click();
+    // Открыть страницу Selenide в Github
 
-      // Перейти в раздел Wiki проекта
-      $(".UnderlineNav-body").$(partialLinkText("Wiki")).click();
+    open(url);
+    $(".header-search-input").click();
+    $(".header-search-input").sendKeys("selenide");
+    $(".header-search-input").submit();
+    $(".repo-list").$(linkText("selenide/selenide")).click();
 
-      // Убедиться, что в списке страниц (Pages) есть страница SoftAssertions
-      $(".markdown-body").$(linkText("Soft assertions")).shouldBe(visible).click();
+    // Перейти в раздел Wiki проекта
+    $(".UnderlineNav-body").$(partialLinkText("Wiki")).click();
 
-      // Откройте страницу SoftAssertions, проверьте что внутри есть пример кода для JUnit5
+    // Убедиться, что в списке страниц (Pages) есть страница SoftAssertions
+    $(".markdown-body").$(linkText("Soft assertions")).shouldBe(visible).click();
 
-      $("#wiki-body").shouldHave(text("Using JUnit5 extend test class"));
+    // Откройте страницу SoftAssertions, проверьте что внутри есть пример кода для JUnit5
 
-    }
+    $("#wiki-body").shouldHave(text("Using JUnit5 extend test class"));
+
+  }
 }
